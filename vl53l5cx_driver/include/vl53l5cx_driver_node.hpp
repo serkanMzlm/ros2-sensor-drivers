@@ -12,6 +12,11 @@
 #include "vl53l5cx_api.hpp"
 #include "vl53l5cx_buffers.hpp"
 
+#include <iomanip>
+extern "C"{
+#include <errno.h>
+#include <unistd.h>
+}
 
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/range.hpp"
