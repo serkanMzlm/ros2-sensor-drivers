@@ -47,7 +47,7 @@ void VL53L5CXDriver::getRange(){
 		}
         sum = sum/16;
         msg.range = sum;
-        range_pub.publish(msg);
+        range_pub->publish(msg);
     }
 }
 
