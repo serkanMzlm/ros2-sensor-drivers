@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "pmw3901_driver = pmw3901_driver.pmw3901_driver:main"
+            "pmw3901_driver_node = pmw3901_driver.pmw3901_driver:main"
         ],
     },
 )
