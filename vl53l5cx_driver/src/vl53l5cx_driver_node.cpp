@@ -1,9 +1,14 @@
 #include "vl53l5cx_driver_node.hpp"
 
+#include <chrono>
+
 VL53L5CXDriver::VL53L5CXDriver(): Node("VL53L5CX_node"){
     if(init() < 0){
         exit(-1);
     }
+    range_pub = this->create_publisher<RangeMsg>("range", 10);
+    timer_ = this->create_wall_timer(std::chrono::milliseconds(100), std::bind(
+                        &VL53L5CXDriver::getRange, this));
 }
 
 int VL53L5CXDriver::init(){
