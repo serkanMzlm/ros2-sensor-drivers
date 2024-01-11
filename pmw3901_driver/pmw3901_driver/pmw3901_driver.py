@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
-from example_interfaces.msg import Int32MultiArray
+from std_msgs.msg import Int32MultiArray
 
 import time
 from pmw3901 import PMW3901
