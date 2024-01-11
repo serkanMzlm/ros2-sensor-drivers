@@ -36,14 +36,18 @@ int VL53L5CXDriver::init(){
 void VL53L5CXDriver::getRange(){
     RangeMsg msg;
     status = vl53l5cx_check_data_ready(&dev, &isReady);
-    // int sum;
+    int sum = 0;
     if(isReady){ 
         vl53l5cx_get_ranging_data(&dev, &Results);
         for(int a = 0; a < 16; a++){
-			if(a % 8 == 0) std::cout << "\n";
-            std::cout <<"|" << std::setw(4) << 
-                    Results.distance_mm[VL53L5CX_NB_TARGET_PER_ZONE*a] << " mm|";
+			// if(a % 4 == 0) std::cout << "\n";
+            // std::cout <<"|" << std::setw(4) << 
+            //         Results.distance_mm[VL53L5CX_NB_TARGET_PER_ZONE*a] << " mm|";
+            sum += Results.distance_mm[VL53L5CX_NB_TARGET_PER_ZONE*a];
 		}
+        sum = sum/16;
+        msg.range = sum;
+        range_pub.publish(msg);
     }
 }
 
