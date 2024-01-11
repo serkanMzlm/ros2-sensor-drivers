@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'pwm3901_driver'
+package_name = 'pmw3901_driver'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "pmw3901_driver = pwm3901_driver.pmw3901_driver:main"
+            "pmw3901_driver = pmw3901_driver.pmw3901_driver:main"
         ],
     },
 )
