@@ -42,7 +42,6 @@ int VL53L5CXDriver::getRange(){
     return -1;
 }
 
-
 void VL53L5CXDriver::reportError(int error, std::string error_info ){
 	std::cerr << "Error! " << error_info << ": " << strerror(error); 
 }
