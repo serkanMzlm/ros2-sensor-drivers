@@ -25,6 +25,7 @@ private:
     rclcpp::Publisher<RangeMsg>::SharedPtr range_pub;
     rclcpp::Publisher<ImuMsg>::SharedPtr imu_pub;
     rclcpp::TimerBase::SharedPtr timer_;
+    int count = 0;
 private:
     void declareParameters();
 

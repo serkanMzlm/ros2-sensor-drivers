@@ -77,10 +77,12 @@ void MultiSensor::getIMU(){
 }
 
 void MultiSensor::callbackSensor(){
-    if(vl53l5cx_flag && false){
+    if(vl53l5cx_flag && (count > 40)){
         getRange();
+        count = 0;
     }
     getIMU();
+    count++;
 }
 
 void MultiSensor::declareParameters(){
@@ -94,7 +96,7 @@ void MultiSensor::declareParameters(){
     this->declare_parameter<double>("accel_x_offset", 0.0);
     this->declare_parameter<double>("accel_y_offset", 0.0);
     this->declare_parameter<double>("accel_z_offset", 0.0);
-    this->declare_parameter<int>("frequency", 0.0);
+    this->declare_parameter<int>("frequency", 1.0);
 }
 
 
