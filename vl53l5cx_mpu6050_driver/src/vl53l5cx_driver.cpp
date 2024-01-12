@@ -18,7 +18,7 @@ int VL53L5CXDriver::initVL53L5CX(){
     }
     status = vl53l5cx_init(&dev);
     usleep(DELAY);
-    status = vl53l5cx_set_ranging_frequency_hz(&dev, 20);
+    status = vl53l5cx_set_ranging_frequency_hz(&dev, 50);
     usleep(DELAY);
     vl53l5cx_set_resolution(&dev, VL53L5CX_RESOLUTION_4X4);
     usleep(DELAY);

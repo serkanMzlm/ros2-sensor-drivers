@@ -31,7 +31,7 @@ MultiSensor::MultiSensor(): Node("multi_sensor"),
     mpu6050->printConfig();
     mpu6050->printOffsets();
 
-     imu_pub = this->create_publisher<ImuMsg>("imu", 20);
+     imu_pub = this->create_publisher<ImuMsg>("imu", 10);
     range_pub = this->create_publisher<RangeMsg>("range", 10);
 
     std::chrono::duration<int64_t, std::milli> frequency =
@@ -77,7 +77,7 @@ void MultiSensor::getIMU(){
 }
 
 void MultiSensor::callbackSensor(){
-    if(vl53l5cx_flag && (count > 40)){
+    if(vl53l5cx_flag && (count > 15)){
         getRange();
         count = 0;
     }
