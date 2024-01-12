@@ -28,6 +28,8 @@ ament_target_dependencies(
 	sensor_msgs
 )
 
+target_link_libraries(vl53l5cx_mpu6050_driver_node i2c)
+
 target_include_directories(vl53l5cx_mpu6050_driver_node PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 	$<BUILD_INTERFACE:${VL_API_PATH}/inc>
@@ -37,6 +39,10 @@ target_include_directories(vl53l5cx_mpu6050_driver_node PUBLIC
 
 install(TARGETS vl53l5cx_mpu6050_driver_node
   DESTINATION lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY launch config
+		DESTINATION share/${PROJECT_NAME}/
 )
 
 ament_package()

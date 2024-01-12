@@ -17,8 +17,8 @@ private:
     rclcpp::Publisher<ImuMsg>::SharedPtr imu_pub;
     rclcpp::TimerBase::SharedPtr timer_;
     std::unique_ptr<MPU6050> mpu6050;
-    size_t count_;
-    uint64_t updateTime;
+    // size_t count_;
+    // uint64_t updateTime;
     void declareParameters();
 };
  #endif
