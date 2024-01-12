@@ -33,10 +33,10 @@ int VL53L5CXDriver::getRange(){
     int sum = 0;
     if(isReady){ 
         vl53l5cx_get_ranging_data(&dev, &Results);
-        for(int a = 0; a < 16; a++){
+        for(int a:read_data_que){
             sum += Results.distance_mm[VL53L5CX_NB_TARGET_PER_ZONE*a];
 		}
-        sum = sum/16;
+        sum = sum/4;
         return sum;
     }
     return -1;

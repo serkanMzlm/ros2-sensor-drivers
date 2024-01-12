@@ -19,6 +19,7 @@ public:
     void reportError(int error, std::string error_info = "Errno");
 
 private:
+    int read_data_que[4] = {5, 6, 9, 10};
     VL53L5CX_Configuration dev;
     uint8_t status, isAlive, isReady;
     VL53L5CX_ResultsData Results;
