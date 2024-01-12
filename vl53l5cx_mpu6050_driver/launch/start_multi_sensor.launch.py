@@ -7,14 +7,14 @@ from launch.substitutions import LaunchConfiguration
 import os
 
 config = os.path.join(
-        get_package_share_directory('mpu6050_driver'),
+        get_package_share_directory('vl53l5cx_mpu6050_driver'),
         'config',
         'params.yml'
     )
 
 mpu6050driver_node = Node(
-        package='mpu6050_driver',
-        executable='mpu6050_driver_node',
+        package='vl53l5cx_mpu6050_driver',
+        executable='vl53l5cx_mpu6050_driver_node',
         output="screen",
         emulate_tty=True,
         # respawn=True,
