@@ -26,17 +26,17 @@ class MyNode(Node):
         except RuntimeError:
             return
 
-        self.tx += x
-        self.ty += y
+        # self.tx += x
+        # self.ty += y
 
         # Mesaj oluştur
         msg = Int32MultiArray()
-        msg.data = [x, y, self.tx, self.ty]
+        msg.data = [x, y]
 
         # Mesajı yayınla
         self.publisher_.publish(msg)
 
-        self.get_logger().info("Relative: x {:03d} y {:03d} | Absolute: x {:03d} y {:03d}".format(x, y, self.tx, self.ty))
+        # self.get_logger().info("Relative: x {:03d} y {:03d}".format(x, y))
 
 def main(args=None):
     rclpy.init(args=args)
