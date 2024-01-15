@@ -30,8 +30,8 @@ class MyNode(Node):
         # self.ty += y
 
         msg = Twist()
-        msg.linear.x = x
-        msg.linear.y = y
+        msg.linear.x = float(x)
+        msg.linear.y = float(y)
 
         self.publisher_.publish(msg)
         # self.get_logger().info("Relative: x {:03d} y {:03d}".format(x, y))
