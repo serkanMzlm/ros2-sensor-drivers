@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Int32MultiArray
+from geometry_msgs.msg import Twist
 
 import time
 from pmw3901 import PMW3901
@@ -9,7 +9,7 @@ from pmw3901 import PMW3901
 class MyNode(Node):
     def __init__(self):
         super().__init__('pmw3901_node')
-        self.publisher_ = self.create_publisher(Int32MultiArray, 'pmw3901_data', 10)
+        self.publisher_ = self.create_publisher(Twist, 'optical_flow', 10)
 
         self.sensor = PMW3901(spi_port=0, spi_cs_gpio=8)
         self.sensor.set_rotation(0)
@@ -29,13 +29,11 @@ class MyNode(Node):
         # self.tx += x
         # self.ty += y
 
-        # Mesaj oluştur
-        msg = Int32MultiArray()
-        msg.data = [x, y]
+        msg = Twist()
+        msg.linear.x = x
+        msg.linear.y = y
 
-        # Mesajı yayınla
         self.publisher_.publish(msg)
-
         # self.get_logger().info("Relative: x {:03d} y {:03d}".format(x, y))
 
 def main(args=None):
