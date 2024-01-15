@@ -22,13 +22,13 @@ MultiSensor::MultiSensor(): Node("multi_sensor"),
     mpu6050->setAccOffset(this->get_parameter("accel_x_offset").as_double(),
                         this->get_parameter("accel_y_offset").as_double(),
                         this->get_parameter("accel_z_offset").as_double());
+    mpu6050->calibrated = this->get_parameter("calibrate").as_bool();
+    // if (this->get_parameter("calibrate").as_bool()) {
+    //     RCLCPP_INFO(this->get_logger(), "Calibrating...");
+    //     mpu6050->calibrate();
+    // }
 
-    if (this->get_parameter("calibrate").as_bool()) {
-        RCLCPP_INFO(this->get_logger(), "Calibrating...");
-        mpu6050->calibrate();
-    }
-
-    mpu6050->printConfig();
+    // mpu6050->printConfig();
     mpu6050->printOffsets();
 
      imu_pub = this->create_publisher<ImuMsg>("imu", 10);

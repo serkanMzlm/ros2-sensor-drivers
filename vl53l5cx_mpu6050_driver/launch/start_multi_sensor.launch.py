@@ -22,12 +22,14 @@ mpu6050driver_node = Node(
                 ('/imu', '/mpu6050')
         ],
         parameters=[config]
+        # parameters=['/home/ems/Rovercopter/ros2_sensor/vl53l5cx_mpu6050_driver/config/params.yml']
     )
 
 optical_flow = Node(
             package='pmw3901_driver',
             executable='pmw3901_driver_node',
             output='screen',
+            emulate_tty=True,
 )
 
 def generate_launch_description():
