@@ -34,7 +34,7 @@ class MyNode(Node):
         msg.linear.y = float(y)
 
         self.publisher_.publish(msg)
-        # self.get_logger().info("Relative: x {:03d} y {:03d}".format(x, y))
+        self.get_logger().info("Relative: x {:03d} y {:03d}".format(x, y))
 
 def main(args=None):
     rclpy.init(args=args)
