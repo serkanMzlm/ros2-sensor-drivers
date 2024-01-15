@@ -24,7 +24,14 @@ mpu6050driver_node = Node(
         parameters=[config]
     )
 
+optical_flow = Node(
+            package='pmw3901_driver',
+            executable='pmw3901_driver_node',
+            output='screen',
+)
+
 def generate_launch_description():
    return LaunchDescription([
-        mpu6050driver_node
+        mpu6050driver_node,
+        optical_flow
    ])
