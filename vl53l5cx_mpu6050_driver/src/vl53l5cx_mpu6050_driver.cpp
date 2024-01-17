@@ -50,6 +50,8 @@ MultiSensor::MultiSensor(): Node("multi_sensor"),
 void MultiSensor::getRange(){
     RangeMsg msg;
     msg.range = vl53l5cx->getRange();
+    msg.max_range = 4 * 1000;
+	msg.min_range = 0;
     if(msg.range >= 0){
         range_pub->publish(msg);
     }
