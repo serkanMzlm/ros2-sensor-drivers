@@ -32,7 +32,7 @@ MultiSensor::MultiSensor(): Node("multi_sensor"),
     mpu6050->printOffsets();
 
      imu_pub = this->create_publisher<ImuMsg>("imu", 10);
-    range_pub = this->create_publisher<RangeMsg>("range", 10);
+    range_pub = this->create_publisher<RangeMsg>("height", 10);
 
     std::chrono::duration<int64_t, std::milli> frequency =
                         1000ms / this->get_parameter("frequency").as_int();
