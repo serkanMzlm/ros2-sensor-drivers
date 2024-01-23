@@ -1,4 +1,5 @@
 #include "vl53l5cx_mpu6050_driver.hpp"
+#include "filter.hpp"
 
 using namespace std::chrono_literals;
 
@@ -28,10 +29,10 @@ MultiSensor::MultiSensor(): Node("multi_sensor"),
     //     mpu6050->calibrate();
     // }
 
-    // mpu6050->printConfig();
+    mpu6050->printConfig();
     mpu6050->printOffsets();
 
-     imu_pub = this->create_publisher<ImuMsg>("imu", 10);
+    imu_pub = this->create_publisher<ImuMsg>("imu", 10);
     range_pub = this->create_publisher<RangeMsg>("height", 10);
 
     std::chrono::duration<int64_t, std::milli> frequency =
@@ -40,6 +41,11 @@ MultiSensor::MultiSensor(): Node("multi_sensor"),
     if(vl53l5cx->initVL53L5CX() < 0){
         RCLCPP_ERROR(this->get_logger(), "Failed to initialize VL53L5CX...");
         vl53l5cx_flag = false;
+    }
+
+    for(int i = 0; i < 3; i++){
+        lpf2pInit(&lpfDataGyro[i], 400, 80);
+        lpf2pInit(&lpfDataAccel[i], 400, 30);
     }
 
     timer_ = this->create_wall_timer(frequency, std::bind(
@@ -62,13 +68,13 @@ void MultiSensor::getIMU(){
     message.header.stamp = this->get_clock()->now();
     message.header.frame_id = "base_link";
     message.linear_acceleration_covariance = {0};
-    message.linear_acceleration.x = mpu6050->getAccelerationX();
-    message.linear_acceleration.y = mpu6050->getAccelerationY();
-    message.linear_acceleration.z = mpu6050->getAccelerationZ();
+    message.linear_acceleration.x = lpf2pApply(&lpfDataAccel[0], mpu6050->getAccelerationX());
+    message.linear_acceleration.y = lpf2pApply(&lpfDataAccel[1], mpu6050->getAccelerationY());
+    message.linear_acceleration.z = lpf2pApply(&lpfDataAccel[2], mpu6050->getAccelerationZ());
     message.angular_velocity_covariance[0] = {0};
-    message.angular_velocity.x = mpu6050->getAngularVelocityX();
-    message.angular_velocity.y = mpu6050->getAngularVelocityY();
-    message.angular_velocity.z = mpu6050->getAngularVelocityZ();
+    message.angular_velocity.x = lpf2pApply(&lpfDataGyro[0], mpu6050->getAngularVelocityX());
+    message.angular_velocity.y = lpf2pApply(&lpfDataGyro[1], mpu6050->getAngularVelocityY());
+    message.angular_velocity.z = lpf2pApply(&lpfDataGyro[2], mpu6050->getAngularVelocityZ());
     // Invalidate quaternion
     message.orientation_covariance[0] = -1;
     message.orientation.x = 0;
