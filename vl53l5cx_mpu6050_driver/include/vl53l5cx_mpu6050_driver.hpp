@@ -5,6 +5,7 @@
 #include "sensor_msgs/msg/range.hpp"
 #include "sensor_msgs/msg/imu.hpp"
 
+#include "filter.hpp"
 #include "mpu6050.hpp"
 #include "vl53l5cx_driver.hpp"
 

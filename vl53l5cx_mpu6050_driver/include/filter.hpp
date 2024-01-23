@@ -2,7 +2,7 @@
 #define __FILTER_HPP__
 
 #include  <cmath>
-
+#define M_PI_F (3.14159265359)
 typedef struct {
   float a1;
   float a2;
