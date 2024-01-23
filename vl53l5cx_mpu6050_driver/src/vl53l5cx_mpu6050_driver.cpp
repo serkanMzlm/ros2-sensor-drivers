@@ -66,8 +66,8 @@ void MultiSensor::getIMU(){
     message.linear_acceleration.y = mpu6050->getAccelerationY();
     message.linear_acceleration.z = mpu6050->getAccelerationZ();
     message.angular_velocity_covariance[0] = {0};
-    message.angular_velocity.y = mpu6050->getAngularVelocityX();
-    message.angular_velocity.x = -mpu6050->getAngularVelocityY();
+    message.angular_velocity.x = mpu6050->getAngularVelocityX();
+    message.angular_velocity.y = mpu6050->getAngularVelocityY();
     message.angular_velocity.z = mpu6050->getAngularVelocityZ();
     // Invalidate quaternion
     message.orientation_covariance[0] = -1;
